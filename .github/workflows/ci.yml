@@ -1,13 +1,12 @@
 name: GitHub CI
 
 on:
-
-  pull_request:
-
-  push:
-
-  schedule:
-    - cron: 0 0 * * 0
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Docker Version'
+        required: true
+        default: '20.10.9'
 
 jobs:
 
@@ -40,6 +39,8 @@ jobs:
           set -Eeuo pipefail -x
           docker build -t boot2docker/boot2docker .
           docker run --rm boot2docker/boot2docker > boot2docker.iso
+        env:
+          DOCKER_VERSION: ${{ github.event.inputs.version }}
 
       - name: '"ls"'
         run: ls -lh boot2docker.iso
