@@ -37,7 +37,7 @@ jobs:
       - name: Build ISO
         run: |
           set -Eeuo pipefail -x
-          docker build -t boot2docker/boot2docker .
+          docker build -e DOCKER_VERSION -t boot2docker/boot2docker .
           docker run --rm boot2docker/boot2docker > boot2docker.iso
         env:
           DOCKER_VERSION: ${{ github.event.inputs.version }}
