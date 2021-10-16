@@ -1,4 +1,4 @@
-name: GitHub CI
+name: Build boot2docker ISO
 
 on:
   workflow_dispatch:
