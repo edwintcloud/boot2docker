@@ -4,18 +4,15 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Docker Version'
+        description: "Docker Version"
         required: true
-        default: '20.10.9'
+        default: "20.10.9"
 
 jobs:
-
   build-test:
-
     runs-on: ubuntu-latest
 
     steps:
-
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
@@ -42,8 +39,8 @@ jobs:
         env:
           DOCKER_VERSION: ${{ github.event.inputs.version }}
 
-      - name: '"ls"'
-        run: ls -lh boot2docker.iso
-
-      - name: '"docker images"'
-        run: docker images
+      - name: Upload ISO
+        uses: actions/upload-artifact@v2
+        with:
+          name: boot2docker.iso
+          path: boot2docker.iso
